@@ -13,8 +13,8 @@ TagManager:
   - UI
   - Ground
   - Ladder
-  - 
-  - 
+  - Background
+  - Bounce
   - 
   - 
   - 
@@ -52,6 +52,9 @@ TagManager:
     locked: 0
   - name: Water
     uniqueID: 2549394501
+    locked: 0
+  - name: Bounce
+    uniqueID: 3553765963
     locked: 0
   - name: Player
     uniqueID: 46534613
