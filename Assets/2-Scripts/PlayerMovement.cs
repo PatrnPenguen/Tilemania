@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Threading.Tasks;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
     CapsuleCollider2D capsule;
     BoxCollider2D box;
     
+    bool isAlive = true;
+    [SerializeField] float deathSpeedX = 10f;
+    [SerializeField] float deathSpeedY = 8f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -25,19 +29,22 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if(!isAlive){return;}
         Run();
         ClimbLadder();
         FlipSprite();
+        Die();
     }
 
     void OnMove(InputValue value)
     {
+        if(!isAlive){return;}
         moveInput = value.Get<Vector2>(); 
-        Debug.Log(moveInput);
     }
 
     void OnJump(InputValue value)
     {
+        if(!isAlive){return;}
         if (!box.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return;}
         if (value.isPressed)
         {
@@ -75,5 +82,26 @@ public class PlayerMovement : MonoBehaviour
         Vector2 playerVerticalVelocity = new Vector2(rb.linearVelocity.x, moveInput.y*climbSpeed);
         rb.linearVelocity = playerVerticalVelocity;
         animator.SetBool("isClimbing", Mathf.Abs(rb.linearVelocity.y) > Mathf.Epsilon);
+    }
+
+    void Die()
+    {
+        if (capsule.IsTouchingLayers(LayerMask.GetMask("Enemy", "Spine", "Water")))
+        {
+            Dying();
+        }
+    }
+
+    async Task Dying()
+    {
+        isAlive = false;
+        animator.SetTrigger("Dying");
+        rb.linearVelocity = new Vector2 (-deathSpeedX*Mathf.Sign(rb.linearVelocityX), deathSpeedY);
+        await Task.Delay(1000);
+        rb.linearVelocity = new Vector2 (rb.linearVelocityX, -rb.linearVelocityY);
+        if (box.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
     }
 }
