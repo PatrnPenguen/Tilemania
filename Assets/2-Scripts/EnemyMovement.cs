@@ -14,14 +14,12 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         _rb.linearVelocity = new Vector2 (moveSpeed, _rb.linearVelocity.y);
-        print(_rb.linearVelocity);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Platforms"))
         {
-            print(other.name);
             moveSpeed = -moveSpeed;
             EnemyFlip();
         }

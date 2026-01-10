@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     Vector2 moveInput;
     Animator animator;
     
-    [SerializeField] float runSpeed = 5f;
+    [SerializeField] public float runSpeed = 5f;
     [SerializeField] float jumpForce = 18f;
     [SerializeField] float climbSpeed = 5f;
     [SerializeField] float gravity = 6f;
@@ -19,12 +19,17 @@ public class PlayerMovement : MonoBehaviour
     bool isAlive = true;
     [SerializeField] float deathSpeedX = 10f;
     [SerializeField] float deathSpeedY = 8f;
+    
+    GameObject gun;
+    [SerializeField] GameObject bullet;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         capsule = GetComponent<CapsuleCollider2D>();
         box =  GetComponent<BoxCollider2D>();
+        gun =  GameObject.FindGameObjectWithTag("Gun");
     }
 
     void Update()
@@ -34,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         ClimbLadder();
         FlipSprite();
         Die();
+        print(rb.linearVelocity.x);
     }
 
     void OnMove(InputValue value)
@@ -51,6 +57,14 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity += new Vector2(0, jumpForce);
         }
     }
+
+    void OnAttack(InputValue value)
+    {
+        if(!isAlive){return;}
+        Instantiate(bullet, gun.transform.position, transform.rotation);
+    }
+
+   
 
     void Run()
     {

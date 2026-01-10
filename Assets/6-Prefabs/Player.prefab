@@ -81,7 +81,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 46534613
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: 1857188551261513057, guid: 4b8a2ded0fdd5b84695397c5c006597e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -228,6 +228,7 @@ MonoBehaviour:
   gravity: 6
   deathSpeedX: 10
   deathSpeedY: 8
+  bullet: {fileID: 6544841434503526923, guid: e29edad0d2538aa4c97fb8d8ce2061b7, type: 3}
 --- !u!61 &6699508824341918840
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -285,7 +286,7 @@ GameObject:
   - component: {fileID: 3603915669489879475}
   m_Layer: 3
   m_Name: Gun
-  m_TagString: Untagged
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

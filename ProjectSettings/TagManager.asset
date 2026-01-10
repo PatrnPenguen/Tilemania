@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Platforms
   - Enemy
+  - Gun
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -19,9 +21,9 @@ TagManager:
   - Bounce
   - Enemy
   - Spine
-  - 
-  - 
-  - 
+  - Bullet
+  - Gun
+  - Interactables
   - 
   - 
   - 
@@ -63,6 +65,9 @@ TagManager:
     locked: 0
   - name: Enemy
     uniqueID: 4130843667
+    locked: 0
+  - name: Interactbles
+    uniqueID: 1514238661
     locked: 0
   - name: Player
     uniqueID: 46534613
