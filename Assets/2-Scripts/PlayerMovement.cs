@@ -64,14 +64,11 @@ public class PlayerMovement : MonoBehaviour
         Instantiate(bullet, gun.transform.position, transform.rotation);
     }
 
-   
-
     void Run()
     {
         Vector2 playerHorizontalVelocity = new Vector2(moveInput.x*runSpeed, rb.linearVelocity.y);
         rb.linearVelocity = playerHorizontalVelocity;
         animator.SetBool("isRunning", Mathf.Abs(rb.linearVelocity.x) > Mathf.Epsilon);
-        
     }
 
     void FlipSprite()
