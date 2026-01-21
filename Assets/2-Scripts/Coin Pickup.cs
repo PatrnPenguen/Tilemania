@@ -10,8 +10,8 @@ public class CoinPickup : MonoBehaviour
         {
             wasColledted = true;
             AudioSource.PlayClipAtPoint(coinPickupSFX, transform.position);
-            gameObject.SetActive(false);
             Destroy(gameObject);
+            FindFirstObjectByType<GameSession>().IncreaseScore();
         }
         
     }

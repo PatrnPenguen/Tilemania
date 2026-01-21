@@ -100,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
         if (capsule.IsTouchingLayers(LayerMask.GetMask("Enemy", "Spine", "Water")))
         {
             Dying();
+            FindAnyObjectByType<GameSession>().ProcessPlayerDeath();
         }
     }
 
